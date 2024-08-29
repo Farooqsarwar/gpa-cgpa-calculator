@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SubjectInputScreen extends StatefulWidget {
@@ -53,6 +52,9 @@ class _SubjectInputScreenState extends State<SubjectInputScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Calculate your GPA'),
@@ -60,13 +62,13 @@ class _SubjectInputScreenState extends State<SubjectInputScreen> {
       ),
       backgroundColor: Colors.grey[400],
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(screenHeight * 0.02),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               width: double.infinity,
-              height: 50,
+              height: screenHeight * 0.07,
               decoration: BoxDecoration(
                 color: Colors.black.withOpacity(0.3),
                 borderRadius: BorderRadius.circular(12),
@@ -78,7 +80,7 @@ class _SubjectInputScreenState extends State<SubjectInputScreen> {
                   labelText: 'Enter number of subjects',
                   labelStyle: TextStyle(color: Colors.black),
                   border: InputBorder.none,
-                  contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                  contentPadding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
                 ),
                 onChanged: (value) {
                   setState(() {
@@ -88,13 +90,13 @@ class _SubjectInputScreenState extends State<SubjectInputScreen> {
                 },
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: screenHeight * 0.03),
             Expanded(
               child: ListView.builder(
                 itemCount: _numberOfSubjects,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    padding: EdgeInsets.symmetric(vertical: screenHeight * 0.01),
                     child: Row(
                       children: [
                         Expanded(
@@ -110,12 +112,12 @@ class _SubjectInputScreenState extends State<SubjectInputScreen> {
                                 hintText: 'Subject ${index + 1} Name',
                                 hintStyle: TextStyle(color: Colors.black),
                                 border: InputBorder.none,
-                                contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                                contentPadding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
                               ),
                             ),
                           ),
                         ),
-                        SizedBox(width: 10),
+                        SizedBox(width: screenWidth * 0.02),
                         Expanded(
                           child: Container(
                             decoration: BoxDecoration(
@@ -129,13 +131,13 @@ class _SubjectInputScreenState extends State<SubjectInputScreen> {
                                 hintText: 'Grade',
                                 hintStyle: TextStyle(color: Colors.black),
                                 border: InputBorder.none,
-                                contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                                contentPadding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
                               ),
                               keyboardType: TextInputType.text,
                             ),
                           ),
                         ),
-                        SizedBox(width: 10),
+                        SizedBox(width: screenWidth * 0.02),
                         Expanded(
                           child: Container(
                             decoration: BoxDecoration(
@@ -149,7 +151,7 @@ class _SubjectInputScreenState extends State<SubjectInputScreen> {
                                 hintText: 'Cr Hours',
                                 hintStyle: TextStyle(color: Colors.black),
                                 border: InputBorder.none,
-                                contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                                contentPadding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
                               ),
                               keyboardType: TextInputType.number,
                             ),
@@ -161,7 +163,7 @@ class _SubjectInputScreenState extends State<SubjectInputScreen> {
                 },
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: screenHeight * 0.03),
             Center(
               child: ElevatedButton(
                 onPressed: () {
@@ -177,44 +179,35 @@ class _SubjectInputScreenState extends State<SubjectInputScreen> {
                       title: Text('GPA Calculated', style: TextStyle(color: Colors.black)),
                       content: Text('Your GPA is: ${_gpa.toStringAsFixed(2)}', style: TextStyle(color: Colors.black)),
                       actions: [
-                        TextButton(
+                        ElevatedButton(
                           onPressed: () {
-                            Navigator.of(context).pop();
+                            Navigator.pop(context);
                           },
-                          child: Text('OK', style: TextStyle(color: Colors.black)),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.grey[700],
+                          ),
+                          child: Text('OK', style: TextStyle(color: Colors.white)),
                         ),
                       ],
                     ),
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.black,
-                  backgroundColor: Colors.grey[300],
-                  padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                  backgroundColor: Colors.black.withOpacity(0.3),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: screenWidth * 0.15,
+                    vertical: screenHeight * 0.02,
+                  ),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12.0),
                   ),
                 ),
-                child: Text('Submit and Calculate GPA'),
+                child: Text('Calculate GPA', style: TextStyle(color: Colors.white)),
               ),
             ),
           ],
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    for (var controller in _subjectControllers) {
-      controller.dispose();
-    }
-    for (var controller in _gradeControllers) {
-      controller.dispose();
-    }
-    for (var controller in _creditHourControllers) {
-      controller.dispose();
-    }
-    super.dispose();
   }
 }

@@ -1,12 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class cgpa extends StatefulWidget {
-  const cgpa({super.key});
+class Cgpa extends StatefulWidget {
+  const Cgpa({super.key});
+
   @override
-  _cgpaState createState() => _cgpaState();
+  _CgpaState createState() => _CgpaState();
 }
-class _cgpaState extends State<cgpa> {
+
+class _CgpaState extends State<Cgpa> {
   int _numberOfSubjects = 0;
   final List<TextEditingController> _subjectControllers = [];
   final List<TextEditingController> _gradeControllers = [];
@@ -75,6 +76,9 @@ class _cgpaState extends State<cgpa> {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Calculate your CGPA'),
@@ -82,13 +86,13 @@ class _cgpaState extends State<cgpa> {
       ),
       backgroundColor: Colors.grey[400],
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(screenHeight * 0.02),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               width: double.infinity,
-              height: 50,
+              height: screenHeight * 0.07,
               decoration: BoxDecoration(
                 color: Colors.black.withOpacity(0.3),
                 borderRadius: BorderRadius.circular(12),
@@ -96,19 +100,19 @@ class _cgpaState extends State<cgpa> {
               child: TextField(
                 controller: _previousGpaController,
                 keyboardType: TextInputType.number,
-                style: const TextStyle(color: Colors.black),
-                decoration: const InputDecoration(
+                style: TextStyle(color: Colors.black),
+                decoration: InputDecoration(
                   labelText: 'Enter previous GPA/CGPA',
                   labelStyle: TextStyle(color: Colors.black),
                   border: InputBorder.none,
-                  contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                  contentPadding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: screenHeight * 0.03),
             Container(
               width: double.infinity,
-              height: 50,
+              height: screenHeight * 0.07,
               decoration: BoxDecoration(
                 color: Colors.black.withOpacity(0.3),
                 borderRadius: BorderRadius.circular(12),
@@ -116,31 +120,31 @@ class _cgpaState extends State<cgpa> {
               child: TextField(
                 controller: _previousCreditHoursController,
                 keyboardType: TextInputType.number,
-                style: const TextStyle(color: Colors.black),
-                decoration: const InputDecoration(
+                style: TextStyle(color: Colors.black),
+                decoration: InputDecoration(
                   labelText: 'Enter previous credit hours',
                   labelStyle: TextStyle(color: Colors.black),
                   border: InputBorder.none,
-                  contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                  contentPadding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: screenHeight * 0.03),
             Container(
               width: double.infinity,
-              height: 50,
+              height: screenHeight * 0.07,
               decoration: BoxDecoration(
                 color: Colors.black.withOpacity(0.3),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: TextField(
                 keyboardType: TextInputType.number,
-                style: const TextStyle(color: Colors.black),
-                decoration: const InputDecoration(
+                style: TextStyle(color: Colors.black),
+                decoration: InputDecoration(
                   labelText: 'Enter number of subjects',
                   labelStyle: TextStyle(color: Colors.black),
                   border: InputBorder.none,
-                  contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                  contentPadding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
                 ),
                 onChanged: (value) {
                   setState(() {
@@ -150,13 +154,13 @@ class _cgpaState extends State<cgpa> {
                 },
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: screenHeight * 0.03),
             Expanded(
               child: ListView.builder(
                 itemCount: _numberOfSubjects,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    padding: EdgeInsets.symmetric(vertical: screenHeight * 0.01),
                     child: Row(
                       children: [
                         Expanded(
@@ -167,17 +171,17 @@ class _cgpaState extends State<cgpa> {
                             ),
                             child: TextField(
                               controller: _subjectControllers[index],
-                              style: const TextStyle(color: Colors.black),
+                              style: TextStyle(color: Colors.black),
                               decoration: InputDecoration(
                                 hintText: 'Subject ${index + 1} Name',
-                                hintStyle: const TextStyle(color: Colors.black),
+                                hintStyle: TextStyle(color: Colors.black),
                                 border: InputBorder.none,
-                                contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+                                contentPadding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
                               ),
                             ),
                           ),
                         ),
-                        const SizedBox(width: 10),
+                        SizedBox(width: screenWidth * 0.02),
                         Expanded(
                           child: Container(
                             decoration: BoxDecoration(
@@ -186,18 +190,18 @@ class _cgpaState extends State<cgpa> {
                             ),
                             child: TextField(
                               controller: _gradeControllers[index],
-                              style: const TextStyle(color: Colors.black),
-                              decoration: const InputDecoration(
+                              style: TextStyle(color: Colors.black),
+                              decoration: InputDecoration(
                                 hintText: 'Grade',
                                 hintStyle: TextStyle(color: Colors.black),
                                 border: InputBorder.none,
-                                contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                                contentPadding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
                               ),
                               keyboardType: TextInputType.text,
                             ),
                           ),
                         ),
-                        const SizedBox(width: 10),
+                        SizedBox(width: screenWidth * 0.02),
                         Expanded(
                           child: Container(
                             decoration: BoxDecoration(
@@ -206,12 +210,12 @@ class _cgpaState extends State<cgpa> {
                             ),
                             child: TextField(
                               controller: _creditHourControllers[index],
-                              style: const TextStyle(color: Colors.black),
-                              decoration: const InputDecoration(
+                              style: TextStyle(color: Colors.black),
+                              decoration: InputDecoration(
                                 hintText: 'Cr Hours',
                                 hintStyle: TextStyle(color: Colors.black),
                                 border: InputBorder.none,
-                                contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                                contentPadding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
                               ),
                               keyboardType: TextInputType.number,
                             ),
@@ -223,7 +227,7 @@ class _cgpaState extends State<cgpa> {
                 },
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: screenHeight * 0.03),
             Center(
               child: ElevatedButton(
                 onPressed: () {
@@ -232,28 +236,30 @@ class _cgpaState extends State<cgpa> {
                     context: context,
                     builder: (context) => AlertDialog(
                       backgroundColor: Colors.grey[400],
-                      title: const Text('CGPA Calculated', style: TextStyle(color: Colors.black)),
-                      content: Text('Your CGPA is: ${_cgpa.toStringAsFixed(2)}', style: const TextStyle(color: Colors.black)),
+                      title: Text('CGPA Calculated', style: TextStyle(color: Colors.black)),
+                      content: Text('Your CGPA is: ${_cgpa.toStringAsFixed(2)}', style: TextStyle(color: Colors.black)),
                       actions: [
                         TextButton(
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          child: const Text('OK', style: TextStyle(color: Colors.black)),
+                          child: Text('OK', style: TextStyle(color: Colors.black)),
                         ),
                       ],
                     ),
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.black,
-                  backgroundColor: Colors.grey[300],
-                  padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                  backgroundColor: Colors.black.withOpacity(0.3),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: screenWidth * 0.15,
+                    vertical: screenHeight * 0.02,
+                  ),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12.0),
                   ),
                 ),
-                child: const Text('Submit and Calculate CGPA'),
+                child: Text('Submit and Calculate CGPA', style: TextStyle(color: Colors.white)),
               ),
             ),
           ],
@@ -261,6 +267,7 @@ class _cgpaState extends State<cgpa> {
       ),
     );
   }
+
   @override
   void dispose() {
     for (var controller in _subjectControllers) {
