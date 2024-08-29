@@ -16,7 +16,6 @@ class _CgpaState extends State<Cgpa> {
   double _cgpa = 0.0;
   final TextEditingController _previousGpaController = TextEditingController();
   final TextEditingController _previousCreditHoursController = TextEditingController();
-
   final Map<String, double> _gradeMap = {
     'A': 4.0,
     'B+': 3.5,
@@ -25,7 +24,6 @@ class _CgpaState extends State<Cgpa> {
     'C': 2.0,
     'F': 0.0,
   };
-
   void _createTextFields() {
     _subjectControllers.clear();
     _gradeControllers.clear();
@@ -267,7 +265,6 @@ class _CgpaState extends State<Cgpa> {
       ),
     );
   }
-
   @override
   void dispose() {
     for (var controller in _subjectControllers) {
