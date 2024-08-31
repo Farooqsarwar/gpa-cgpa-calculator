@@ -1,0 +1,1 @@
+ C:\\Users\\hp\\StudioProjects\\gpacalculator\\.dart_tool\\flutter_build\\bf124c5478f168141dff6a5eaaea7c9a\\native_assets.yaml: 
