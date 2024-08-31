@@ -61,7 +61,7 @@ class _SubjectInputScreenState extends State<SubjectInputScreen> {
         backgroundColor: Colors.grey[400],
       ),
       backgroundColor: Colors.grey[400],
-      body: Padding(
+      body: SingleChildScrollView(
         padding: EdgeInsets.all(screenHeight * 0.02),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,77 +91,77 @@ class _SubjectInputScreenState extends State<SubjectInputScreen> {
               ),
             ),
             SizedBox(height: screenHeight * 0.03),
-            Expanded(
-              child: ListView.builder(
-                itemCount: _numberOfSubjects,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: EdgeInsets.symmetric(vertical: screenHeight * 0.01),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.black.withOpacity(0.3),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: TextField(
-                              controller: _subjectControllers[index],
-                              style: TextStyle(color: Colors.black),
-                              decoration: InputDecoration(
-                                hintText: 'Subject ${index + 1} Name',
-                                hintStyle: TextStyle(color: Colors.black),
-                                border: InputBorder.none,
-                                contentPadding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
-                              ),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: _numberOfSubjects,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: EdgeInsets.symmetric(vertical: screenHeight * 0.01),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.3),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: TextField(
+                            controller: _subjectControllers[index],
+                            style: TextStyle(color: Colors.black),
+                            decoration: InputDecoration(
+                              hintText: 'Subject ${index + 1} Name',
+                              hintStyle: TextStyle(color: Colors.black),
+                              border: InputBorder.none,
+                              contentPadding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
                             ),
                           ),
                         ),
-                        SizedBox(width: screenWidth * 0.02),
-                        Expanded(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.black.withOpacity(0.3),
-                              borderRadius: BorderRadius.circular(12),
+                      ),
+                      SizedBox(width: screenWidth * 0.02),
+                      Expanded(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.3),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: TextField(
+                            controller: _gradeControllers[index],
+                            style: TextStyle(color: Colors.black),
+                            decoration: InputDecoration(
+                              hintText: 'Grade',
+                              hintStyle: TextStyle(color: Colors.black),
+                              border: InputBorder.none,
+                              contentPadding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
                             ),
-                            child: TextField(
-                              controller: _gradeControllers[index],
-                              style: TextStyle(color: Colors.black),
-                              decoration: InputDecoration(
-                                hintText: 'Grade',
-                                hintStyle: TextStyle(color: Colors.black),
-                                border: InputBorder.none,
-                                contentPadding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
-                              ),
-                              keyboardType: TextInputType.text,
-                            ),
+                            keyboardType: TextInputType.text,
                           ),
                         ),
-                        SizedBox(width: screenWidth * 0.02),
-                        Expanded(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.black.withOpacity(0.3),
-                              borderRadius: BorderRadius.circular(12),
+                      ),
+                      SizedBox(width: screenWidth * 0.02),
+                      Expanded(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.3),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: TextField(
+                            controller: _creditHourControllers[index],
+                            style: TextStyle(color: Colors.black),
+                            decoration: InputDecoration(
+                              hintText: 'Cr Hours',
+                              hintStyle: TextStyle(color: Colors.black),
+                              border: InputBorder.none,
+                              contentPadding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
                             ),
-                            child: TextField(
-                              controller: _creditHourControllers[index],
-                              style: TextStyle(color: Colors.black),
-                              decoration: InputDecoration(
-                                hintText: 'Cr Hours',
-                                hintStyle: TextStyle(color: Colors.black),
-                                border: InputBorder.none,
-                                contentPadding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
-                              ),
-                              keyboardType: TextInputType.number,
-                            ),
+                            keyboardType: TextInputType.number,
                           ),
                         ),
-                      ],
-                    ),
-                  );
-                },
-              ),
+                      ),
+                    ],
+                  ),
+                );
+              },
             ),
             SizedBox(height: screenHeight * 0.03),
             Center(

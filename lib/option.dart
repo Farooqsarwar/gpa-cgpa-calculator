@@ -8,8 +8,6 @@ class Option extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
-    double screenWidth = MediaQuery.of(context).size.width;
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[400],
@@ -40,30 +38,42 @@ class Option extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const SubjectInputScreen()),
-                      );
-                    },
-                    child: const Text(
-                      'Calculate GPA',
-                      style: TextStyle(color: Colors.black,fontSize: 17),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(90)
+                  ),
+                    width: 150,
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const SubjectInputScreen()),
+                        );
+                      },
+                      child: const Text(
+                        'Calculate GPA',
+                        style: TextStyle(color: Colors.black,fontSize: 17),
+                      ),
                     ),
                   ),
-
-                  const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const Cgpa()),
-                      );
-                    },
-                    child: const Text(
-                      'Calculate CGPA',
-                      style: TextStyle(color: Colors.black,fontSize: 17),
+                  Container(
+                    width: 150,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(90)
+                    ),
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const Cgpa()),
+                        );
+                      },
+                      child: const Text(
+                        'Calculate CGPA',
+                        style: TextStyle(color: Colors.black,fontSize: 17),
+                      ),
                     ),
                   ),
                 ],
