@@ -12,6 +12,7 @@ class Option extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.grey[400],
       ),
+
       backgroundColor: Colors.grey[400],
       body: Padding(
         padding: EdgeInsets.all(screenHeight * 0.02),
@@ -36,14 +37,14 @@ class Option extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 15,right: 15),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Container(
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(90)
                   ),
-                    width: 150,
+                    width: 130,
                     child: TextButton(
                       onPressed: () {
                         Navigator.push(
@@ -52,13 +53,13 @@ class Option extends StatelessWidget {
                         );
                       },
                       child: const Text(
-                        'Calculate GPA',
+                        ' GPA',
                         style: TextStyle(color: Colors.black,fontSize: 17),
                       ),
                     ),
                   ),
                   Container(
-                    width: 150,
+                    width: 130,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(90)
@@ -71,7 +72,7 @@ class Option extends StatelessWidget {
                         );
                       },
                       child: const Text(
-                        'Calculate CGPA',
+                        ' CGPA',
                         style: TextStyle(color: Colors.black,fontSize: 17),
                       ),
                     ),

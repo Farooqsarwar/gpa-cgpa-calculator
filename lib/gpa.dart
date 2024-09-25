@@ -34,20 +34,71 @@ class _SubjectInputScreenState extends State<SubjectInputScreen> {
     }
   }
 
+  bool _isValidGrade(String grade) {
+    return _gradeMap.containsKey(grade);
+  }
+
   void _calculateGPA() {
     double totalPoints = 0.0;
     int totalCreditHours = 0;
+    String invalidGrades = '';
+
     for (int i = 0; i < _numberOfSubjects; i++) {
       String grade = _gradeControllers[i].text.trim().toUpperCase();
       int creditHours = int.tryParse(_creditHourControllers[i].text.trim()) ?? 0;
-      if (_gradeMap.containsKey(grade) && creditHours > 0) {
+      if (_isValidGrade(grade) && creditHours > 0) {
         totalPoints += _gradeMap[grade]! * creditHours;
         totalCreditHours += creditHours;
+      } else if (creditHours > 0) {
+        invalidGrades += 'Subject ${i + 1}: ${_subjectControllers[i].text} - Invalid Grade: $grade\n';
       }
     }
+
     setState(() {
       _gpa = totalCreditHours > 0 ? totalPoints / totalCreditHours : 0.0;
     });
+
+    if (invalidGrades.isNotEmpty) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          backgroundColor: Colors.grey[400],
+          title: Text('Invalid Grades', style: TextStyle(color: Colors.black)),
+          content: Text(invalidGrades, style: TextStyle(color: Colors.black)),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.grey[700],
+              ),
+              child: Text('OK', style: TextStyle(color: Colors.white)),
+            ),
+          ],
+        ),
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          backgroundColor: Colors.grey[400],
+          title: Text('GPA Calculated', style: TextStyle(color: Colors.black)),
+          content: Text('Your GPA is: ${_gpa.toStringAsFixed(3)}', style: TextStyle(color: Colors.black)),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.grey[700],
+              ),
+              child: Text('OK', style: TextStyle(color: Colors.white)),
+            ),
+          ],
+        ),
+      );
+    }
   }
 
   @override
@@ -60,6 +111,7 @@ class _SubjectInputScreenState extends State<SubjectInputScreen> {
         title: Text('Calculate your GPA'),
         backgroundColor: Colors.grey[400],
       ),
+
       backgroundColor: Colors.grey[400],
       body: SingleChildScrollView(
         padding: EdgeInsets.all(screenHeight * 0.02),
@@ -77,8 +129,8 @@ class _SubjectInputScreenState extends State<SubjectInputScreen> {
                 keyboardType: TextInputType.number,
                 style: TextStyle(color: Colors.black),
                 decoration: InputDecoration(
-                  labelText: 'Enter number of subjects',
-                  labelStyle: TextStyle(color: Colors.black),
+                  hintText: 'Enter number of subjects',
+                  hintStyle: TextStyle(color: Colors.black),
                   border: InputBorder.none,
                   contentPadding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
                 ),
@@ -172,25 +224,6 @@ class _SubjectInputScreenState extends State<SubjectInputScreen> {
                     print('Subject: ${_subjectControllers[i].text}, Grade: ${_gradeControllers[i].text}, Credit Hours: ${_creditHourControllers[i].text}');
                   }
                   print('GPA: $_gpa');
-                  showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      backgroundColor: Colors.grey[400],
-                      title: Text('GPA Calculated', style: TextStyle(color: Colors.black)),
-                      content: Text('Your GPA is: ${_gpa.toStringAsFixed(2)}', style: TextStyle(color: Colors.black)),
-                      actions: [
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.grey[700],
-                          ),
-                          child: Text('OK', style: TextStyle(color: Colors.white)),
-                        ),
-                      ],
-                    ),
-                  );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black.withOpacity(0.3),
